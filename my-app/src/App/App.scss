@@ -1,4 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo:wght@700&family=Dancing+Script:wght@700&family=Kalam&family=Lobster&display=swap');
+@mixin kalam{
+    font-family: 'Kalam', cursive;
+}
+@mixin lobster {
+    font-family: 'Lobster', cursive;
+
+}
+@mixin dancingScript {
+    font-family: 'Dancing Script', cursive;
+}
+@mixin chivo{
+    font-family: 'Chivo', sans-serif;
+}
 .wrapper{
+    
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -8,10 +23,14 @@
     margin: 0px;
     box-sizing: border-box;
 }
-.div{
-    background-color: green;
-}
+
 .day-list{
+    
+     -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+    &::-webkit-scrollbar {
+        display: none;
+    }
     position: relative;
     display: flex;
     flex-direction: column;
@@ -19,33 +38,51 @@
     align-items: center;
     flex-grow: 1;
     height: 650px;
-    background-color: #050609ea;
+    background-color: #272727;
     overflow-x: hidden;
+    max-width: 320px;
+    min-width: 300px;
 }
 .day{
+    &:active{
+        transition:  0s all ease-in;
+        color: #d8d8d8;
+    }
+    &:hover{
+        cursor: pointer;
+        opacity: 1;
+        transform: scale(1.2,1.2);
+    }
+    transition: ease-in .3s all;
+    opacity: 0.4;
     position: relative;
     letter-spacing: 3px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    @include lobster;
     font-weight: bold;
     line-height: 150%;
     font-size: 55px;
-    color: #D69F7E;
+    color: #c6a567;
+
     &__line{
         position: absolute;
         left: -130px;
         top: 43px;
-        width: 100px;
+        width: 90px;
         height: 2px;
-        background-color: rgb(219, 103, 74);
+        background-color: #c6a567d7;
         &--sub1{
+            height: 1px;
             top: 15px;
-            width: 70px;
+            width: 60px;
             opacity: 0.7;
+            background-color: #c6a567d7;
         }
         &--sub2{
+            height: 1px;
             top: 70px;
-            width: 70px;
+            width: 60px;
             opacity: 0.7;
+            background-color: #c6a567d7;
         }
 
     }
@@ -53,22 +90,46 @@
         margin-left: -10px;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         font-weight: bold;
-        font-size: 25px;
-        color: rgba(214, 160, 126, 0.808);
+        font-size: 22px;
+        letter-spacing: 0px;
     }
+    &--active{
+        opacity: 1;
+        transform: scale(1.2,1.2);
+    }
+    
+}
+.day.day--active>.day__line{
+    background-color: #f54b17;
 }
 .button{
+    transition: .4s all ease-in;
 font-size: 20px;
 z-index: 10;
 top: 0px;
 border: 0;
  background-color: transparent;
-color: rgba(214, 160, 126, 0.808);
+color: #c6a567;
+&:focus{
+    outline: none;
+}
+&:hover{
+    cursor: pointer;
+   color: rgba(247, 141, 43, 0.815);
+}
+&:active{
+   transition: 0s all ease-in;
+    color: rgba(250, 216, 184, 0.815);
+}
+
     &--days{
         position: sticky;
-        background-color: rgba(31, 29, 29, 0.418); 
+        background-color: transparent; 
         width: 100%;
         font-size: 70px;
+        &:hover{
+            box-shadow: 0 0 10px 1000px #27272779;
+        }
     }
     &--task_page{
         position: absolute;
@@ -88,26 +149,41 @@ color: rgba(214, 160, 126, 0.808);
         font-size: 30px;
     }
 }
-.task-page{
+.task-page{  
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     flex-grow: 2;
     height: 650px;
-    background-color: #38393bf5;
+    min-width: 600px;
+    background: rgb(46,46,46);
+background: linear-gradient(90deg, rgba(46,46,46,1) 2%, rgb(61, 61, 61) 30%, rgba(51,51,51,1) 77%);
     &__title{
+        @include dancingScript;
         margin-bottom: 50px;
-        font-size: 50px;
-        color: rgba(214, 160, 126, 0.808);
+        font-size: 60px;
+        font-weight: bold;
+        color: #c6a567;
     }
     &__input{
+        @include kalam;
+        padding-left: 15px;
+        font-size: 20px;
+        color: #d8d8d8b7;
         margin-bottom: 20px;
         width: 75%;
         height: 60px;
         background-color: transparent;
         border: 0;
         border-bottom: 1px solid rgba(214, 160, 126, 0.336);
+        &::placeholder{
+            font-size: 19px;       
+            color: #d8d8d84b;
+        }
+        &:focus{
+            outline: none;
+        }
     }
     &__inner{
         width: 80%;
@@ -118,6 +194,11 @@ color: rgba(214, 160, 126, 0.808);
         overflow: auto;
         max-height: 380px;
         height: 380px;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
     }
     &__task-wrapper{
         height: 40px;
@@ -131,18 +212,36 @@ color: rgba(214, 160, 126, 0.808);
         }
     }
 &__task{
+    @include chivo;
     margin-top: 5px;
     transition: ease-in-out .2s;
     display: flex;
     align-items: center;
     width: 80%;
-    font-size: 20px;
+    font-size: 22px;
     color: rgba(230, 230, 230, 0.644);
     font-weight: bold;
     line-height: 80%;
     &--active{
         text-decoration: line-through;
         opacity: 0.3;
+        }
+        &-input{
+            @include chivo;
+            color: rgba(230, 230, 230, 0.644);
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            border: 0;
+            font-size: 22px;
+            &:focus{
+                outline: none;
+            }
+            &::placeholder{
+                font-size: 25px;
+                @include dancingScript;
+                color: #d8d8d8b9;
+            }
         }
     }
     &__check{
@@ -158,4 +257,5 @@ color: rgba(214, 160, 126, 0.808);
             border: 1px black solid;
         }
     }
+    
 }
