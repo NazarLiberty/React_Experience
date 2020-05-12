@@ -15,7 +15,10 @@ export function MySnackbar(props) {
         setOpen(true);
 
     };
-
+    if (props.open) {
+        setOpen(true)
+        text = "TEST"
+    }
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;

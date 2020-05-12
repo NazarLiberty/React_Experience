@@ -1,4 +1,38 @@
 @import url("https://fonts.googleapis.com/css2?family=Chivo:wght@700&family=Dancing+Script:wght@700&family=Kalam&family=Lobster&display=swap");
+.clear-hash {
+  -webkit-transition: ease .4s all;
+  transition: ease .4s all;
+  text-align: center;
+  width: 100px;
+  margin-top: 35px;
+  margin-left: auto;
+  color: rgba(255, 255, 255, 0.466);
+}
+
+.clear-hash:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.4, 1.4);
+          transform: scale(1.4, 1.4);
+  color: red;
+}
+
+.clear-hash__text {
+  word-spacing: 5px;
+  text-transform: uppercase;
+  font-size: 9px;
+  font-weight: bold;
+  font-family: 'Chivo', sans-serif;
+  border-bottom: rgba(255, 0, 0, 0.397) 1px solid;
+}
+
+.clear-hash__button {
+  margin-right: -8px;
+  color: rgba(255, 109, 109, 0.719);
+  font-size: 13px;
+  border: 0;
+  background-color: transparent;
+}
+
 .wrapper {
   width: 900px;
   display: -webkit-box;
@@ -313,8 +347,8 @@
 .task-page__task-list {
   width: 100%;
   overflow: auto;
-  max-height: 380px;
-  height: 380px;
+  max-height: 320px;
+  height: 300px;
   -ms-overflow-style: none;
   /* Internet Explorer 10+ */
   scrollbar-width: none;

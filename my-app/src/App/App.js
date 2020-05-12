@@ -4,22 +4,25 @@ import { useState } from 'react';
 import { MySnackbar } from "../components/Snackbar"
 
 function ControlButton(props) {
+    let title;
     let symbol = ""
     let elClass = "button"
     if (props.type === "addDay") {
         elClass += " button--days"
         symbol = <MySnackbar del={false} addDay={props.countDay}> <i className="far fa-plus-square"></i> </MySnackbar>
-        return <div className={elClass} onClick={props.action}>{symbol}</div>
+        return <div className={elClass} onClick={props.action} title="Add day">{symbol}</div>
     }
     if (props.type === "addTask") { symbol = <i className="fas fa-marker"></i>; elClass += " button--add_task" }
     if (props.type === "delDay") {
+        title = "Delete day"
         elClass += " button--task_page"
         symbol = <i className="far fa-trash-alt"></i>
     }
+    if (props.type === "delHash") { symbol = <i className="fas fa-ban"></i>; elClass = "clear-hash__button" }
     if (props.type === "delTask") { symbol = <i className="far fa-trash-alt"></i>; elClass += " button--task" }
     if (props.type === "editTask") { symbol = <i className="far fa-edit"></i>; elClass += " button--task" }
     if (props.type === "editSave") { symbol = "OK"; elClass += " button--task" }
-    return <button className={elClass} onClick={props.action}>{symbol}</button>
+    return <button className={elClass} onClick={props.action} title={title}>{symbol}</button>
 }
 
 function Wrapper(props) {
@@ -194,14 +197,23 @@ function TaskPage(props) {
     function actionEdit(key, text) {
         props.edit(key, text)
     }
+    function actionDeleteHash() {
+        let choice = window.confirm("This action will remove your saved days and tasks after reload. Are you sure?")
+        if (choice) {
+            localStorage.clear();
+        }
+    }
     return <div className="task-page">
-
         <MySnackbar del={true} delDay={props.deletedDay}><ControlButton type="delDay" action={delDay} /></MySnackbar>
         <div className="task-page__inner">
             <h1 className="task-page__title">Day {props.day}. Task list:</h1>
             <div><input type="text" className="task-page__input" onChange={valueReader} placeholder="What is your focus today?" />
                 <ControlButton type="addTask" action={actionAddTask} /> </div>
             <TaskList list={props.list} del={actionDeleteTask} click={click} edit={actionEdit} />
+            <div className="clear-hash" onClick={actionDeleteHash}>
+                <ControlButton type="delHash" />
+                <span className="clear-hash__text"> clear hash </span>
+            </div>
         </div>
     </div>
 }
