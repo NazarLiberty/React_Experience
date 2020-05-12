@@ -25,11 +25,11 @@ export function MySnackbar(props) {
     };
     if (props.del) {
         severity = "error"
-        text = "Day have been deleted"
+        text = "Day №" + (props.delDay) + " have been deleted"
     }
     else {
         severity = "success"
-        text = "Day have been added"
+        text = "Day №" + (props.addDay) + " have been added"
     }
     return (
         <div onClick={handleClick}>

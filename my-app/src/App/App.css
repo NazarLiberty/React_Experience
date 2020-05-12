@@ -1,15 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Chivo:wght@700&family=Dancing+Script:wght@700&family=Kalam&family=Lobster&display=swap");
 .wrapper {
+  width: 900px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
   max-width: 1100px;
+}
+
+@media screen and (max-width: 992px) {
+  .wrapper {
+    width: 96vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 
 * {
@@ -37,18 +49,31 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
   height: 650px;
   background-color: #272727;
   overflow-x: hidden;
-  max-width: 320px;
-  min-width: 300px;
+  width: 33%;
 }
 
 .day-list::-webkit-scrollbar {
   display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .day-list {
+    height: 250px;
+    width: 100%;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    padding-left: 130px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .day-list {
+    padding-left: 80px;
+  }
 }
 
 .day {
@@ -75,6 +100,12 @@
   opacity: 1;
   -webkit-transform: scale(1.2, 1.2);
           transform: scale(1.2, 1.2);
+}
+
+@media screen and (max-width: 768px) {
+  .day {
+    font-size: 70px;
+  }
 }
 
 .day__line {
@@ -150,13 +181,21 @@
   position: -webkit-sticky;
   position: sticky;
   background-color: transparent;
-  width: 100%;
   font-size: 70px;
 }
 
 .button--days:hover {
   -webkit-box-shadow: 0 0 10px 1000px #27272779;
           box-shadow: 0 0 10px 1000px #27272779;
+}
+
+@media screen and (max-width: 768px) {
+  .button--days {
+    left: 75%;
+    top: 60px;
+    width: auto;
+    font-size: 60px;
+  }
 }
 
 .button--task_page {
@@ -191,14 +230,18 @@
       -ms-flex-align: center;
           align-items: center;
   position: relative;
-  -webkit-box-flex: 2;
-      -ms-flex-positive: 2;
-          flex-grow: 2;
+  width: 66%;
   height: 650px;
-  min-width: 600px;
   background: #2e2e2e;
   background: -webkit-gradient(linear, left top, right top, color-stop(2%, #2e2e2e), color-stop(30%, #3d3d3d), color-stop(77%, #333333));
   background: linear-gradient(90deg, #2e2e2e 2%, #3d3d3d 30%, #333333 77%);
+}
+
+@media screen and (max-width: 768px) {
+  .task-page {
+    min-height: 350px;
+    width: 100%;
+  }
 }
 
 .task-page__title {
@@ -207,6 +250,12 @@
   font-size: 60px;
   font-weight: bold;
   color: #c6a567;
+}
+
+@media screen and (max-width: 568px) {
+  .task-page__title {
+    font-size: 47px;
+  }
 }
 
 .task-page__input {
@@ -251,6 +300,16 @@
   height: 80%;
 }
 
+@media screen and (max-width: 568px) {
+  .task-page__inner {
+    width: 95%;
+    text-align: center;
+  }
+  .task-page__inner .task-page__input {
+    width: 85%;
+  }
+}
+
 .task-page__task-list {
   width: 100%;
   overflow: auto;
@@ -260,6 +319,12 @@
   /* Internet Explorer 10+ */
   scrollbar-width: none;
   /* Firefox */
+}
+
+@media screen and (max-width: 768px) {
+  .task-page__task-list {
+    height: 300px;
+  }
 }
 
 .task-page__task-list::-webkit-scrollbar {
@@ -300,6 +365,12 @@
   line-height: 80%;
 }
 
+@media screen and (max-width: 450px) {
+  .task-page__task {
+    width: 70%;
+  }
+}
+
 .task-page__task--active {
   text-decoration: line-through;
   opacity: 0.3;
@@ -310,8 +381,10 @@
   color: rgba(230, 230, 230, 0.644);
   width: 100%;
   height: 100%;
-  background-color: transparent;
+  background-color: rgba(46, 46, 46, 0.63);
   border: 0;
+  border-radius: 5px;
+  padding-left: 15px;
   font-size: 22px;
 }
 

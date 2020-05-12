@@ -13,11 +13,17 @@
     font-family: 'Chivo', sans-serif;
 }
 .wrapper{
-    
+    width: 900px;
     display: flex;
     flex-wrap: nowrap;
-    flex-direction: row;
     max-width: 1100px;
+    @media screen and (max-width:992px){
+        width: 96vw;
+    }
+    @media screen and (max-width:768px){
+        flex-direction: column;
+    }
+  
 }
 *{
     margin: 0px;
@@ -36,12 +42,21 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    flex-grow: 1;
     height: 650px;
     background-color: #272727;
     overflow-x: hidden;
-    max-width: 320px;
-    min-width: 300px;
+    width: 33%;
+    @media screen and (max-width:768px){
+        height: 250px;
+        width: 100%;
+        align-items: flex-start;
+        padding-left: 130px;
+        
+    }
+    @media screen and (max-width:400px){
+        padding-left: 80px;
+        
+    }
 }
 .day{
     &:active{
@@ -61,6 +76,10 @@
     font-weight: bold;
     line-height: 150%;
     font-size: 55px;
+    @media screen and (max-width:768px){
+       font-size: 70px;
+        
+    }
     color: #c6a567;
 
     &__line{
@@ -121,14 +140,18 @@ color: #c6a567;
    transition: 0s all ease-in;
     color: rgba(250, 216, 184, 0.815);
 }
-
     &--days{
         position: sticky;
         background-color: transparent; 
-        width: 100%;
         font-size: 70px;
         &:hover{
             box-shadow: 0 0 10px 1000px #27272779;
+        }
+        @media screen and (max-width:768px){
+        left: 75%;
+           top: 60px;
+           width: auto;
+        font-size: 60px;
         }
     }
     &--task_page{
@@ -146,25 +169,35 @@ color: #c6a567;
         margin-left: auto;
     }
     &--add_task{
+
         font-size: 30px;
     }
 }
 .task-page{  
+ 
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    flex-grow: 2;
+    width: 66%;
     height: 650px;
-    min-width: 600px;
     background: rgb(46,46,46);
 background: linear-gradient(90deg, rgba(46,46,46,1) 2%, rgb(61, 61, 61) 30%, rgba(51,51,51,1) 77%);
+@media screen and (max-width:768px){
+    min-height: 350px;
+    width: 100%;
+}
+
     &__title{
         @include dancingScript;
         margin-bottom: 50px;
         font-size: 60px;
         font-weight: bold;
         color: #c6a567;
+        @media screen and (max-width:568px){
+            font-size: 47px
+             
+         }
     }
     &__input{
         @include kalam;
@@ -184,16 +217,28 @@ background: linear-gradient(90deg, rgba(46,46,46,1) 2%, rgb(61, 61, 61) 30%, rgb
         &:focus{
             outline: none;
         }
+        
     }
     &__inner{
         width: 80%;
         height: 80%;
+        @media screen and (max-width:568px){
+          width: 95%;
+          text-align: center;
+            .task-page__input{
+                width: 85%;
+            } 
+         }
     }
     &__task-list{
         width: 100%;
         overflow: auto;
         max-height: 380px;
         height: 380px;
+        @media screen and (max-width:768px){
+            height: 300px;
+            
+        }
         &::-webkit-scrollbar {
             display: none;
         }
@@ -222,6 +267,9 @@ background: linear-gradient(90deg, rgba(46,46,46,1) 2%, rgb(61, 61, 61) 30%, rgb
     color: rgba(230, 230, 230, 0.644);
     font-weight: bold;
     line-height: 80%;
+    @media screen and (max-width:450px){
+        width: 70%;        
+    }
     &--active{
         text-decoration: line-through;
         opacity: 0.3;
@@ -231,8 +279,10 @@ background: linear-gradient(90deg, rgba(46,46,46,1) 2%, rgb(61, 61, 61) 30%, rgb
             color: rgba(230, 230, 230, 0.644);
             width: 100%;
             height: 100%;
-            background-color: transparent;
+            background-color: rgba(46, 46, 46, 0.63);
             border: 0;
+            border-radius: 5px;
+            padding-left: 15px;
             font-size: 22px;
             &:focus{
                 outline: none;

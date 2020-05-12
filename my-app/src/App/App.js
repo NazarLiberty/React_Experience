@@ -8,7 +8,8 @@ function ControlButton(props) {
     let elClass = "button"
     if (props.type === "addDay") {
         elClass += " button--days"
-        symbol = <i className="far fa-plus-square"></i>
+        symbol = <MySnackbar del={false} addDay={props.countDay}> <i className="far fa-plus-square"></i> </MySnackbar>
+        return <div className={elClass} onClick={props.action}>{symbol}</div>
     }
     if (props.type === "addTask") { symbol = <i className="fas fa-marker"></i>; elClass += " button--add_task" }
     if (props.type === "delDay") {
@@ -25,11 +26,9 @@ function Wrapper(props) {
     let parseList;
     if (localStorage.length > 0) parseList = JSON.parse(localStorage.getItem("days"))
     else parseList = props.list
-
-    // if (localStorage.length) { listTT = JSON.parse(localStorage.getItem("days")); console.log("+") }
-    // const [countDay, setCountDay] = useState(parseList.length)
-    // const [count, setCount] = useState(parseList[0].page.length)
+    const [dayNumber, setDayNumber] = useState(props.countDay)
     const [day, setDay] = useState(1)
+    const [deletedDay, setDeletedDay] = useState(null)
     const [page, setPage] = useState(parseList)
     const [index, setIndex] = useState(0)
     const [list, setList] = useState(page[index].page);
@@ -62,16 +61,12 @@ function Wrapper(props) {
         setList(list.map((e) => e))
     }
     function actionAddDay() {
+        if (localStorage.countDay) setDayNumber(Number(localStorage.countDay) + 2)
         countDay++
         localStorage.setItem('countDay', countDay)
         let o = {
             day: countDay + 1,
-            page: [{
-                text: "Hey!", done: false, id: 0,
-            },
-            {
-                text: "This is " + [countDay + 1] + " day", done: false, id: 1,
-            }]
+            page: []
         }
         page.push(o)
         let newList = page.map((e) => e)
@@ -90,6 +85,7 @@ function Wrapper(props) {
 
     }
     function actionDeleteDay() {
+        setDeletedDay(day)
         let indexOf; // deleted item
         let newList = []
         page.forEach(element => {
@@ -122,6 +118,8 @@ function Wrapper(props) {
             setDay(page[indexOf - 1].day)
             setList(page[indexOf - 1].page)
         }
+
+
     }
     function actionEditTask(key, text) {
         page.forEach(element => {
@@ -133,9 +131,9 @@ function Wrapper(props) {
         setPage(renderList)
     }
     return <div className="wrapper">
-        <DayList page={page} addDay={actionAddDay} setDay={actionSetDay} day={day} />
+        <DayList page={page} addDay={actionAddDay} setDay={actionSetDay} day={day} countDay={dayNumber} />
         <TaskPage list={list} del={actionDeleteTask} click={click}
-            addTask={actionAddTask} delDay={actionDeleteDay} day={day} edit={actionEditTask} />
+            addTask={actionAddTask} delDay={actionDeleteDay} day={day} edit={actionEditTask} deletedDay={deletedDay} />
     </div>
 }
 
@@ -146,14 +144,17 @@ function DayList(props) {
     function addDay() {
         props.addDay()
     }
+
     let renderDay = props.page.map((e) => {
         if (e.day === props.day) return <Day text={e.day} key={e.day} day={e.day} setDay={setDay} active={true} />
         return <Day text={e.day} key={e.day} day={e.day} setDay={setDay} />
     })
+
     return (
         <div className="day-list">
-            <MySnackbar del={false}> <ControlButton type="addDay" action={addDay} /> </MySnackbar>
+            <ControlButton type="addDay" action={addDay} countDay={props.countDay} />
             {renderDay}
+
         </div>
 
     );
@@ -195,10 +196,10 @@ function TaskPage(props) {
     }
     return <div className="task-page">
 
-        <MySnackbar del={true}><ControlButton type="delDay" action={delDay} /></MySnackbar>
+        <MySnackbar del={true} delDay={props.deletedDay}><ControlButton type="delDay" action={delDay} /></MySnackbar>
         <div className="task-page__inner">
             <h1 className="task-page__title">Day {props.day}. Task list:</h1>
-            <div><input type="text" className="task-page__input" onChange={valueReader} placeholder="What is yout focus today?" />
+            <div><input type="text" className="task-page__input" onChange={valueReader} placeholder="What is your focus today?" />
                 <ControlButton type="addTask" action={actionAddTask} /> </div>
             <TaskList list={props.list} del={actionDeleteTask} click={click} edit={actionEdit} />
         </div>
@@ -265,7 +266,7 @@ function Task(props) {
     </div>
 }
 export function App() {
-    return <Wrapper list={testList} />
+    return <Wrapper list={testList} countDay={countDay} />
 }
 
 let testList = [
@@ -293,7 +294,6 @@ if (localStorage.getItem("count") === null) count = 2
 else count = Number(localStorage.getItem('count'))
 if (localStorage.getItem("countDay") === null) countDay = 2
 else countDay = Number(localStorage.getItem('countDay'))
-console.log(count)
 
 
 

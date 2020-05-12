@@ -9,8 +9,13 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    padding-top: 50px;
+  }
 }
 /*# sourceMappingURL=index.css.map */
